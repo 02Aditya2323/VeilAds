@@ -1,16 +1,22 @@
 :root {
-  --ink: #111111;
-  --paper: #f5f1e3;
-  --surface: #ffffff;
-  --dark: #0b0e23;
-  --dark-card: #141a3d;
-  --violet: #7c6ff0;
-  --violet-deep: #5b4cd6;
-  --teal: #2dd4bf;
-  --teal-deep: #0f9e8e;
-  --amber: #ffcf5a;
+  --ink: #0e0d12;
+  --void: #0e0d12;
+  --paper: #eee9dd;
+  --vault-paper: #eee9dd;
+  --surface: #fffdf5;
+  --dark: #0e0d12;
+  --dark-card: #171520;
+  --violet: #5b3df6;
+  --violet-deep: #4325d7;
+  --cipher-violet: #5b3df6;
+  --teal: #2fbf9e;
+  --teal-deep: #158a72;
+  --ledger-teal: #2fbf9e;
+  --amber: #f5b942;
+  --payout-gold: #f5b942;
   --rose: #ff6b6b;
-  --muted: #6c6a64;
+  --muted: #5f5a50;
+  --noise: rgba(91, 61, 246, 0.14);
 }
 
 * {
@@ -25,11 +31,11 @@ body {
   margin: 0;
   color: var(--ink);
   background:
-    linear-gradient(rgba(17, 17, 17, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 17, 17, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(14, 13, 18, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 13, 18, 0.06) 1px, transparent 1px),
     var(--paper);
   background-size: 28px 28px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter, "IBM Plex Sans", Arial, Helvetica, sans-serif;
 }
 
 button,
@@ -86,7 +92,7 @@ a {
   display: grid;
   place-items: center;
   border: 3px solid var(--ink);
-  background: var(--violet);
+  background: var(--cipher-violet);
   box-shadow: 4px 4px 0 var(--ink);
 }
 
@@ -137,7 +143,7 @@ a {
 .button.primary {
   background: var(--ink);
   color: var(--surface);
-  box-shadow: 5px 5px 0 var(--violet);
+  box-shadow: 5px 5px 0 var(--cipher-violet);
 }
 
 .button.teal {
@@ -170,25 +176,34 @@ a {
 }
 
 .badge.violet {
-  background: #ece9ff;
-  box-shadow: 3px 3px 0 var(--violet);
+  background: #e7e1ff;
+  box-shadow: 3px 3px 0 var(--cipher-violet);
 }
 
 .badge.teal {
-  background: #d7fff8;
-  box-shadow: 3px 3px 0 var(--teal);
+  background: #d8fff4;
+  box-shadow: 3px 3px 0 var(--ledger-teal);
 }
 
 .badge.amber {
-  background: #fff0bd;
-  box-shadow: 3px 3px 0 var(--amber);
+  background: #fff1c8;
+  box-shadow: 3px 3px 0 var(--payout-gold);
+}
+
+.badge.gold {
+  background: #ffe3a3;
+  box-shadow: 3px 3px 0 var(--payout-gold);
 }
 
 .hero {
   min-height: calc(100vh - 72px);
   display: grid;
   align-items: center;
-  padding: 56px 0 42px;
+  padding: 46px 0 34px;
+  background:
+    radial-gradient(circle at 82% 22%, rgba(91, 61, 246, 0.24), transparent 28%),
+    linear-gradient(135deg, rgba(14, 13, 18, 0.98) 0 58%, transparent 58% 100%);
+  color: var(--surface);
 }
 
 .hero-grid {
@@ -196,6 +211,18 @@ a {
   grid-template-columns: 1.08fr 0.92fr;
   gap: 34px;
   align-items: center;
+}
+
+.hero-copy-stack {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+
+.hero .eyebrow-row .badge {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--cipher-violet);
 }
 
 .eyebrow-row {
@@ -213,7 +240,7 @@ p {
 
 .hero-title {
   margin: 22px 0 24px;
-  font-size: clamp(48px, 8vw, 92px);
+  font-size: clamp(54px, 8.4vw, 108px);
   line-height: 0.92;
   font-weight: 900;
 }
@@ -223,18 +250,25 @@ p {
   margin-top: 8px;
   padding: 6px 12px;
   border: 4px solid var(--ink);
-  background: var(--teal);
+  background: var(--payout-gold);
   box-shadow: 8px 8px 0 var(--ink);
   transform: rotate(-2deg);
+  color: var(--ink);
 }
 
 .hero-copy {
-  max-width: 670px;
-  border-left: 6px solid var(--violet);
+  max-width: 620px;
+  border-left: 6px solid var(--cipher-violet);
   padding-left: 18px;
   font-size: 19px;
   line-height: 1.55;
   font-weight: 700;
+  color: var(--surface);
+  text-shadow: none;
+}
+
+.hero-copy-secondary {
+  border-color: var(--ledger-teal);
 }
 
 .hero-actions,
@@ -247,9 +281,22 @@ p {
 
 .demo-board {
   border: 4px solid var(--ink);
-  background: var(--surface);
-  box-shadow: 10px 10px 0 var(--violet);
+  background: var(--vault-paper);
+  box-shadow: 10px 10px 0 var(--cipher-violet);
   padding: 18px;
+  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.cipher-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 7px, rgba(91, 61, 246, 0.09) 7px 8px),
+    repeating-linear-gradient(90deg, transparent 0 9px, rgba(14, 13, 18, 0.07) 9px 10px);
+  opacity: 0.55;
 }
 
 .sealed-row {
@@ -273,6 +320,8 @@ p {
   gap: 14px;
   padding: 14px;
   font-weight: 900;
+  position: relative;
+  z-index: 1;
 }
 
 .mini-card strong {
@@ -283,6 +332,36 @@ p {
   color: var(--muted);
   font-family: "Courier New", Courier, monospace;
   font-size: 12px;
+}
+
+.payout-card {
+  background: #ffe3a3;
+  box-shadow: 6px 6px 0 var(--payout-gold);
+}
+
+.gold-number {
+  color: var(--ink);
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.tech-strip {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.tech-strip span {
+  border: 2px solid var(--ink);
+  background: var(--surface);
+  padding: 5px 8px;
 }
 
 .stat-bar {
@@ -323,7 +402,9 @@ p {
 
 .section.dark {
   color: var(--surface);
-  background: var(--dark);
+  background:
+    repeating-linear-gradient(135deg, rgba(91, 61, 246, 0.1) 0 2px, transparent 2px 12px),
+    var(--dark);
   border-top: 4px solid var(--ink);
   border-bottom: 4px solid var(--ink);
 }
@@ -345,7 +426,7 @@ p {
 .flow-panel {
   border: 3px solid var(--surface);
   background: var(--dark-card);
-  box-shadow: 6px 6px 0 var(--teal);
+  box-shadow: 6px 6px 0 var(--ledger-teal);
   padding: 18px;
 }
 
@@ -371,7 +452,7 @@ p {
 
 .app-grid {
   display: grid;
-  grid-template-columns: 360px 1fr;
+  grid-template-columns: minmax(320px, 390px) 1fr;
   gap: 20px;
   align-items: start;
   padding: 28px 0 60px;
@@ -379,6 +460,7 @@ p {
 
 .panel {
   padding: 18px;
+  background: var(--surface);
 }
 
 .panel h1,
@@ -399,7 +481,7 @@ p {
 }
 
 .field label {
-  font-family: "Courier New", Courier, monospace;
+  font-family: "IBM Plex Mono", "Courier New", monospace;
   font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
@@ -413,6 +495,12 @@ p {
   padding: 11px 12px;
   font-weight: 800;
   outline: none;
+  box-shadow: inset 4px 0 0 var(--ledger-teal);
+}
+
+.field:first-of-type input,
+.field:first-of-type textarea {
+  box-shadow: inset 4px 0 0 var(--cipher-violet);
 }
 
 .field textarea {
@@ -428,7 +516,30 @@ p {
 }
 
 .slider-line input[type="range"] {
-  accent-color: var(--violet-deep);
+  appearance: none;
+  height: 12px;
+  border: 2px solid var(--ink);
+  background: linear-gradient(90deg, var(--cipher-violet), var(--cipher-violet)) 0 / var(--value, 50%) 100% no-repeat,
+    var(--vault-paper);
+  accent-color: var(--cipher-violet);
+}
+
+.slider-line input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border: 3px solid var(--ink);
+  background: var(--cipher-violet);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.slider-line input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--ink);
+  border-radius: 0;
+  background: var(--cipher-violet);
+  box-shadow: 3px 3px 0 var(--ink);
 }
 
 .slider-number {
@@ -446,21 +557,31 @@ p {
 .campaign-card {
   display: grid;
   gap: 12px;
-  min-height: 190px;
+  min-height: 245px;
   padding: 16px;
+  position: relative;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(135deg, rgba(91, 61, 246, 0.1) 0 2px, transparent 2px 10px),
+    var(--surface);
 }
 
 .campaign-card.winner {
-  background: #d7fff8;
-  box-shadow: 6px 6px 0 var(--teal-deep);
+  background:
+    radial-gradient(circle at 85% 12%, rgba(245, 185, 66, 0.7), transparent 26%),
+    #fff1c8;
+  box-shadow: 8px 8px 0 var(--payout-gold);
+  border-width: 4px;
+  animation: payout-pop 700ms ease both;
 }
 
 .campaign-card.loser {
   opacity: 0.62;
+  filter: grayscale(0.5);
 }
 
 .campaign-card.mine {
-  box-shadow: 6px 6px 0 var(--amber);
+  box-shadow: 6px 6px 0 var(--ledger-teal);
 }
 
 .card-meta {
@@ -480,8 +601,8 @@ p {
 
 .flow-card {
   border: 3px solid var(--ink);
-  background: #f4f1ff;
-  box-shadow: 6px 6px 0 var(--violet);
+  background: #f0ecff;
+  box-shadow: 6px 6px 0 var(--cipher-violet);
   padding: 14px;
 }
 
@@ -505,11 +626,13 @@ p {
 }
 
 .flow-step.active {
-  background: #fff0bd;
+  background: #e7e1ff;
+  box-shadow: inset 6px 0 0 var(--cipher-violet);
 }
 
 .flow-step.done {
-  background: #d7fff8;
+  background: #d8fff4;
+  box-shadow: inset 6px 0 0 var(--ledger-teal);
 }
 
 .flow-step.error {
@@ -534,7 +657,7 @@ p {
 .flow-copy span,
 .flow-copy a {
   color: var(--muted);
-  font-family: "Courier New", Courier, monospace;
+  font-family: "IBM Plex Mono", "Courier New", monospace;
   font-size: 12px;
   font-weight: 800;
 }
@@ -560,6 +683,7 @@ p {
   border: 3px solid var(--ink);
   background: var(--surface);
   padding: 12px;
+  min-height: 72px;
 }
 
 .history-row strong,
@@ -568,21 +692,45 @@ p {
 }
 
 .payout-proof {
-  box-shadow: 6px 6px 0 var(--teal);
+  background: #ffe3a3;
+  box-shadow: 8px 8px 0 var(--payout-gold);
+  animation: payout-pop 700ms ease both;
 }
 
 .proof-grid {
   display: grid;
-  grid-template-columns: 88px 1fr;
+  grid-template-columns: 92px 1fr;
   gap: 8px 12px;
   margin: 12px 0;
 }
 
 .proof-grid span {
   color: var(--muted);
-  font-family: "Courier New", Courier, monospace;
+  font-family: "IBM Plex Mono", "Courier New", monospace;
   font-size: 12px;
   font-weight: 800;
+  text-transform: uppercase;
+}
+
+.proof-grid strong,
+.payout-amount strong {
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  font-size: 26px;
+}
+
+.payout-amount {
+  display: grid;
+  gap: 4px;
+  border: 3px solid var(--ink);
+  background: #ffe3a3;
+  padding: 10px;
+  box-shadow: 4px 4px 0 var(--payout-gold);
+}
+
+.payout-amount span {
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  font-size: 11px;
+  font-weight: 900;
   text-transform: uppercase;
 }
 
@@ -592,8 +740,19 @@ p {
   }
 }
 
+@keyframes payout-pop {
+  0% {
+    transform: translateY(8px);
+    filter: saturate(0.7);
+  }
+  100% {
+    transform: translateY(0);
+    filter: saturate(1);
+  }
+}
+
 .attention-panel {
-  box-shadow: 6px 6px 0 var(--teal);
+  box-shadow: 8px 8px 0 var(--ledger-teal);
   max-width: 920px;
   margin: 0 auto;
 }
@@ -641,7 +800,7 @@ p {
 
 .success-box {
   border: 3px solid var(--ink);
-  background: #d7fff8;
+  background: #d8fff4;
   padding: 12px;
   font-weight: 800;
 }

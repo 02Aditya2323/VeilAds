@@ -1,4 +1,4 @@
-import { ArrowRight, Lock, ShieldCheck, Unlock, WalletCards } from "lucide-react";
+import { ArrowRight, CircleDollarSign, Lock, ShieldCheck, Unlock, WalletCards } from "lucide-react";
 import Link from "next/link";
 import { LockBadge } from "@/components/shared/LockBadge";
 import { StatChip } from "@/components/shared/StatChip";
@@ -11,25 +11,31 @@ export default function LandingPage() {
     <main>
       <section className="hero">
         <div className="container hero-grid">
-          <div>
+          <div className="hero-copy-stack">
             <div className="eyebrow-row">
-              <span className="badge violet">FHE.SEALED</span>
-              <span className="badge teal">COFHE.LIVE</span>
-              <span className="badge">ETH.SEPOLIA</span>
+              <span className="badge violet">Your attention is already being sold.</span>
             </div>
             <h1 className="hero-title">
-              EVERYTHING&apos;S SEALED.
+              YOU JUST NEVER
               <br />
-              <span className="sticker">UNTIL ONE ISN&apos;T.</span>
+              <span className="sticker">SAW A CENT.</span>
             </h1>
             <p className="hero-copy">
-              VeilAds runs advertiser bids and user interest profiles through Fully Homomorphic Encryption on
-              Fhenix. Every number stays ciphertext until the auction resolves. Only the winning match and its
-              clearing price are revealed.
+              Every time you browse, something profiles you — searches, scroll time, clicks — and sells that
+              shadow version of you to advertisers. You never agreed to it. You never got paid for it. And the
+              ads you see are still garbage half the time.
+            </p>
+            <p className="hero-copy hero-copy-secondary">
+              VeilAds flips it. Your interest profile never leaves encrypted form — not to us, not to the
+              advertiser, not to the chain itself. Advertisers bid blind against ciphertext. You get paid the
+              moment you&apos;re matched.
             </p>
             <div className="hero-actions">
               <Link className="button primary" href="/app">
-                Launch Demo <ArrowRight size={16} />
+                Get Paid to Browse <ArrowRight size={16} />
+              </Link>
+              <Link className="button" href="/advertiser">
+                I&apos;m an Advertiser
               </Link>
               {isContractConfigured ? (
                 <a className="button" href={contractUrl} target="_blank" rel="noreferrer">
@@ -42,28 +48,34 @@ export default function LandingPage() {
           </div>
 
           <div className="demo-board" aria-label="Sealed auction preview">
+            <div className="cipher-noise" />
             <div className="sealed-row">
               <div className="mini-card">
                 <div>
-                  <strong>Campaign A</strong>
-                  <span>encrypted targeting + bid</span>
+                  <strong>Sealed Bid</strong>
+                  <span>targeting + max payout encrypted</span>
                 </div>
                 <LockBadge />
               </div>
               <div className="mini-card">
                 <div>
-                  <strong>FHE Auction</strong>
-                  <span>dot product x max bid</span>
+                  <strong>Blind Match</strong>
+                  <span>ciphertext relevance auction</span>
                 </div>
-                <span className="badge amber">2nd price</span>
+                <span className="badge teal">Verified</span>
               </div>
-              <div className="mini-card">
+              <div className="mini-card payout-card">
                 <div>
-                  <strong>Winner + Price</strong>
-                  <span>published with threshold signature</span>
+                  <strong>You Get Paid</strong>
+                  <span>escrow releases after attention proof</span>
                 </div>
-                <LockBadge unlocked />
+                <span className="gold-number">+0.001 ETH</span>
               </div>
+            </div>
+            <div className="tech-strip">
+              <span>FHE.SEALED</span>
+              <span>COFHE.LIVE</span>
+              <span>ETH.SEPOLIA</span>
             </div>
           </div>
         </div>
@@ -72,20 +84,20 @@ export default function LandingPage() {
       <section className="stat-bar" aria-label="Protocol facts">
         <div className="container stat-grid">
           <div className="stat-cell">
-            <strong style={{ color: "var(--violet-deep)" }}>0</strong>
-            <span>RAW VALUES EVER REVEALED</span>
+            <strong style={{ color: "var(--cipher-violet)" }}>0</strong>
+            <span>RAW INTEREST VALUES REVEALED</span>
           </div>
           <div className="stat-cell">
-            <strong style={{ color: "var(--teal-deep)" }}>2</strong>
-            <span>NUMBERS DECRYPTED PER MATCH</span>
+            <strong style={{ color: "var(--ledger-teal)" }}>2</strong>
+            <span>VERIFIED REVEALS PER MATCH</span>
           </div>
           <div className="stat-cell">
-            <strong>1</strong>
-            <span>CONTRACT, NO CROSS-PERMISSION RISK</span>
+            <strong>Blind</strong>
+            <span>ADVERTISERS BID WITHOUT SEEING YOU</span>
           </div>
           <div className="stat-cell">
-            <strong style={{ color: "var(--teal-deep)" }}>ETH</strong>
-            <span>NATIVE ESCROW, NO CUSTOM TOKEN</span>
+            <strong style={{ color: "var(--payout-gold)" }}>ETH</strong>
+            <span>PAID FROM NATIVE ESCROW</span>
           </div>
         </div>
       </section>
@@ -93,7 +105,7 @@ export default function LandingPage() {
       <section id="auction-flow" className="section dark">
         <div className="container">
           <span className="badge teal">Auction Flow</span>
-          <h2 className="section-title">Watch sealed bids become a public clearing price.</h2>
+          <h2 className="section-title">Sealed bid. Blind match. Paid viewer.</h2>
           <div className="flow-grid">
             <div className="flow-panel">
               <Lock size={28} />
@@ -106,9 +118,9 @@ export default function LandingPage() {
               <p>The contract ranks relevance-weighted effective bids without seeing any raw number.</p>
             </div>
             <div className="flow-panel">
-              <Unlock size={28} />
-              <h3>Verified Reveal</h3>
-              <p>Only the winning campaign id and second-price clearing value get published on-chain.</p>
+              <CircleDollarSign size={28} />
+              <h3>Paid Attention</h3>
+              <p>Only the winning campaign, clearing price, and attention pass/fail become verified facts.</p>
             </div>
           </div>
         </div>
@@ -146,7 +158,7 @@ export default function LandingPage() {
       <footer className="footer">
         <div className="container toolbar" style={{ justifyContent: "space-between" }}>
           <strong>VEILADS</strong>
-          <span className="card-meta">Sealed bids. Sealed profiles. One verified reveal.</span>
+          <span className="card-meta">Sealed bids. Sealed profiles. Paid attention.</span>
         </div>
       </footer>
     </main>

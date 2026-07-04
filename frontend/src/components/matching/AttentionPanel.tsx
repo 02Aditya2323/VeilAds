@@ -29,6 +29,14 @@ export function AttentionPanel({
   const mediaKind = useMemo(() => getMediaKind(mediaUrl), [mediaUrl]);
 
   useEffect(() => {
+    setRunning(false);
+    setElapsed(0);
+    setSubmitting(false);
+    setAutoplayBlocked(false);
+    submittedRef.current = Boolean(submitted);
+  }, [campaign.adURI, campaign.id, submitted]);
+
+  useEffect(() => {
     submittedRef.current = Boolean(submitted);
   }, [submitted]);
 
@@ -69,11 +77,12 @@ export function AttentionPanel({
 
   useEffect(() => {
     if (disabled || submitting || submittedRef.current || elapsed < UI_ATTENTION_SECONDS) return;
-    submittedRef.current = true;
     void submitMeasuredAttention();
   }, [disabled, elapsed, submitting]);
 
   async function submitMeasuredAttention() {
+    if (submitting || submittedRef.current) return;
+    submittedRef.current = true;
     setSubmitting(true);
     try {
       setRunning(false);

@@ -32,8 +32,9 @@ export function CampaignCard({
         <h3>{campaign.active ? "Active Campaign" : "Inactive Campaign"}</h3>
         <p className="card-meta">{campaign.adURI || "No creative URI"}</p>
       </div>
-      <div className="card-meta">
-        Escrow: <strong>{Number(formatEther(campaign.escrow)).toFixed(5)} ETH</strong>
+      <div className={isWinner ? "payout-amount" : "card-meta"}>
+        <span>{isWinner ? "Clearing escrow available" : "Public escrow"}</span>
+        <strong>{Number(formatEther(campaign.escrow)).toFixed(5)} ETH</strong>
       </div>
       {campaign.adURI ? (
         <a className="button" href={link} target="_blank" rel="noreferrer">

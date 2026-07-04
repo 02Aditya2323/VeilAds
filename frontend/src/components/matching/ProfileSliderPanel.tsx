@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { categories } from "@/lib/contract";
 
 export function ProfileSliderPanel({
@@ -25,6 +26,7 @@ export function ProfileSliderPanel({
               max={100}
               type="range"
               value={values[index]}
+              style={{ "--value": `${values[index]}%` } as CSSProperties}
               onChange={(event) => {
                 const next = [...values];
                 next[index] = Number(event.target.value);

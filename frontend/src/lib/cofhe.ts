@@ -21,6 +21,26 @@ export type EncryptedInputTuple5 = [
 ];
 
 let client: ReturnType<typeof createCofheClient> | null = null;
+const DECRYPT_RETRY_DELAYS_MS = [2500, 5000, 8500, 13000];
+
+function sleep(ms: number) {
+  return new Promise((resolve) => window.setTimeout(resolve, ms));
+}
+
+function getErrorMessage(error: unknown) {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function isRetryableDecryptError(error: unknown) {
+  const message = getErrorMessage(error).toLowerCase();
+  return (
+    message.includes("ct_source_timeout") ||
+    message.includes("decrypt request failed") ||
+    message.includes("decrypt request not found") ||
+    message.includes("timeout") ||
+    message.includes("no content")
+  );
+}
 
 function getClient() {
   if (!client) {
@@ -81,5 +101,23 @@ export async function decryptForTx(
   handle: bigint
 ) {
   const cofhe = await connectCofhe(publicClient, walletClient);
-  return cofhe.decryptForTx(handle).withoutPermit().execute();
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt <= DECRYPT_RETRY_DELAYS_MS.length; attempt += 1) {
+    try {
+      return await cofhe.decryptForTx(handle).withoutPermit().execute();
+    } catch (error) {
+      lastError = error;
+      if (!isRetryableDecryptError(error) || attempt === DECRYPT_RETRY_DELAYS_MS.length) {
+        throw error;
+      }
+      console.warn(
+        `CoFHE decrypt retry ${attempt + 1}/${DECRYPT_RETRY_DELAYS_MS.length} after:`,
+        getErrorMessage(error)
+      );
+      await sleep(DECRYPT_RETRY_DELAYS_MS[attempt]);
+    }
+  }
+
+  throw lastError;
 }
