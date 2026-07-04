@@ -257,7 +257,7 @@ p {
 }
 
 .hero-copy {
-  max-width: 620px;
+  max-width: 500px;
   border-left: 6px solid var(--cipher-violet);
   padding-left: 18px;
   font-size: 19px;
@@ -269,6 +269,7 @@ p {
 
 .hero-copy-secondary {
   border-color: var(--ledger-teal);
+  margin-top: 14px;
 }
 
 .hero-actions,

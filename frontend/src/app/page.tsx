@@ -21,14 +21,12 @@ export default function LandingPage() {
               <span className="sticker">SAW A CENT.</span>
             </h1>
             <p className="hero-copy">
-              Every time you browse, something profiles you — searches, scroll time, clicks — and sells that
-              shadow version of you to advertisers. You never agreed to it. You never got paid for it. And the
-              ads you see are still garbage half the time.
+              Something profiles you every time you browse — sells that shadow version of you to advertisers. You
+              never agreed. You never got paid. The ads are still garbage half the time.
             </p>
             <p className="hero-copy hero-copy-secondary">
-              VeilAds flips it. Your interest profile never leaves encrypted form — not to us, not to the
-              advertiser, not to the chain itself. Advertisers bid blind against ciphertext. You get paid the
-              moment you&apos;re matched.
+              VeilAds flips it. Your profile stays encrypted — from us, from advertisers, from the chain itself.
+              Get matched, get paid.
             </p>
             <div className="hero-actions">
               <Link className="button primary" href="/app">
