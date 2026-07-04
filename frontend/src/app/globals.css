@@ -99,9 +99,24 @@ a {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   font-size: 13px;
   font-weight: 800;
+}
+
+.nav-links a {
+  border: 2px solid var(--ink);
+  background: #ffe7e5;
+  box-shadow: 3px 3px 0 var(--rose);
+  padding: 8px 10px;
+  line-height: 1;
+  transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+}
+
+.nav-links a:hover {
+  background: #fff1c8;
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
 }
 
 .wallet-cluster {
@@ -123,6 +138,10 @@ a {
 }
 
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   min-height: 44px;
   padding: 0 16px;
 }
@@ -278,6 +297,21 @@ p {
   flex-wrap: wrap;
   gap: 12px;
   align-items: center;
+}
+
+.hero-actions {
+  max-width: 500px;
+  align-items: stretch;
+}
+
+.hero-actions .button {
+  min-width: 0;
+  flex: 1 1 0;
+  white-space: nowrap;
+}
+
+.hero-actions .button.primary {
+  flex-grow: 1.25;
 }
 
 .demo-board {
