@@ -16,6 +16,8 @@ VeilAds turns that flow around. User interest profiles and advertiser targeting/
 
 This isn't a "trust us not to look" policy. The raw values are never available to the app, the advertiser, or the contract in plaintext — not because anyone promised not to look, but because there's nothing to look at.
 
+<img width="1303" height="972" alt="Screenshot 2026-07-14 at 01 57 10" src="https://github.com/user-attachments/assets/a4ab4c29-f080-4aec-8f09-af0437fbf9af" />
+
 ### At a glance
 
 - **1 contract** — no cross-contract permission surface to manage
